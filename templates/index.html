@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <!--Navbar-->
+        <div class="navbar">
+            <div class="logo">
+                {% if usname  %}
+                    <h1><a href="/profile">{{usname}}</a></h1>
+                {% endif %}
+            </div>
+            
+            <div class="right">
+                <a href="/">Trang chủ</a>
+
+                {% if usname  %}
+                    {% if roll == 0  %}
+                        <a href="/add-admin">Thêm tài khoản QTV</a>
+                    {% endif  %}
+                    {% if roll != 2  %}
+                        <a href="/acc-manager">Quản lý tài khoản</a>
+                    {% endif  %}
+                    <a href="/logout">Đăng xuất</a>
+                {% else %}
+                    <a href="/login">Đăng nhập</a>
+                    <a href="/register">Đăng ký</a>
+                {% endif %}
+            </div>
+        </div>
+        <!--Title-->
+        <div class="entry-title">
+            <h2>Trang chủ</h2>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                {% for cate in category %}
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 item" style="margin-bottom:50px">
+                        <div class="item-image">
+                            <a href="/{{cate.id_cate}}"><img width="600" height="300" src="{{cate.image_cate}}"></a>
+                        </div>
+                        <div class="item-info">
+                            <h3>
+                                <a href="#">{{cate.name_cate}}</a>
+                            </h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <br>
+        <!--Footer-->
+        <footer class="ft">
+            <div class="container">
+                <p class="m-0 text-center text-white">Cửa hàng Nội thất - Điện máy Nguyên Phát</p>
+                <p class="m-0 text-center text-white">Địa chỉ: Quốc lộ 19B, thôn Thuận Đức, xã Nhơn Mỹ, thị xã An Nhơn, tỉnh Bình Định</p>
+                {% if usname  %}
+                    <p class="m-0 text-center text-white">SĐT: 0983 242 501 - 0378 731 759 (Hoàng) - 0983 615 228 (Nhung) </p>
+                {% endif %}
+                <p class="m-0 text-center text-white">Website: ....</p>
+                <p class="m-0 text-center text-white">Page: https://facebook.com/noithatdienmaynguyenphat</p>
+            </div>
+        </footer>
+    </body>
+</html>
